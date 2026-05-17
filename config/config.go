@@ -24,6 +24,8 @@ const (
 	Error LogLevel = "error"
 )
 
+var localOnly bool
+
 func GetVersion() string {
 	return strings.TrimSpace(version)
 }
@@ -45,6 +47,14 @@ func GetLogLevel() LogLevel {
 
 func IsDebug() bool {
 	return os.Getenv("SUI_DEBUG") == "true"
+}
+
+func SetLocalOnly(enabled bool) {
+	localOnly = enabled
+}
+
+func IsLocalOnly() bool {
+	return localOnly
 }
 
 func GetDBFolderPath() string {

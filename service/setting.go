@@ -176,6 +176,9 @@ func (s *SettingService) setInt(key string, value int) error {
 	return s.setString(key, strconv.Itoa(value))
 }
 func (s *SettingService) GetListen() (string, error) {
+	if config.IsLocalOnly() {
+		return "127.0.0.1", nil
+	}
 	return s.getString("webListen")
 }
 
@@ -260,6 +263,9 @@ func (s *SettingService) GetTimeLocation() (*time.Location, error) {
 }
 
 func (s *SettingService) GetSubListen() (string, error) {
+	if config.IsLocalOnly() {
+		return "127.0.0.1", nil
+	}
 	return s.getString("subListen")
 }
 
