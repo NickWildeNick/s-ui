@@ -19,4 +19,11 @@ export GOCACHE="$SCRIPT_DIR/.cache/go-build"
 mkdir -p "$GOCACHE"
 
 BUILD_TAGS="with_quic,with_grpc,with_utls,with_acme,with_gvisor,with_naive_outbound,with_musl,badlinkname,tfogo_checklinkname0,with_tailscale"
-go build -ldflags '-w -s -checklinkname=0 -extldflags "-Wl,-no_warn_duplicate_libraries"' -tags "$BUILD_TAGS" -o sui main.go
+LDFLAGS='-w -s -checklinkname=0'
+case "$(uname -s)" in
+    Darwin)
+        LDFLAGS="$LDFLAGS -extldflags \"-Wl,-no_warn_duplicate_libraries\""
+        ;;
+esac
+
+go build -ldflags "$LDFLAGS" -tags "$BUILD_TAGS" -o sui main.go
