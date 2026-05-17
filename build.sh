@@ -18,7 +18,7 @@ cp -R frontend/dist/* web/html/
 export GOCACHE="$SCRIPT_DIR/.cache/go-build"
 mkdir -p "$GOCACHE"
 
-BUILD_TAGS="with_quic,with_grpc,with_utls,with_acme,with_gvisor,with_naive_outbound,with_musl,badlinkname,tfogo_checklinkname0,with_tailscale"
+BUILD_TAGS="with_quic,with_grpc,with_utls,with_acme,with_gvisor,with_naive_outbound,with_purego,badlinkname,tfogo_checklinkname0,with_tailscale"
 LDFLAGS='-w -s -checklinkname=0'
 case "$(uname -s)" in
     Darwin)
